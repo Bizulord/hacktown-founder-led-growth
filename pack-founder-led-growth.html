@@ -141,21 +141,19 @@
           </div>
         </div>
 
-        <form class="form-box" action="#" method="post">
+        <div class="form-box typebot-box">
           <h2>Receba o pack.</h2>
-          <p>Preencha seus dados para receber os templates e a planilha dos próximos 7 dias.</p>
-          <div class="fields">
-            <div class="field"><label for="name">Nome</label><input id="name" name="name" autocomplete="name" placeholder="Seu nome"></div>
-            <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" placeholder="voce@empresa.com"></div>
-            <div class="field"><label for="company">Empresa</label><input id="company" name="company" autocomplete="organization" placeholder="Nome da empresa"></div>
-            <div class="field"><label for="linkedin">LinkedIn</label><input id="linkedin" name="linkedin" autocomplete="url" placeholder="linkedin.com/in/seu-perfil"></div>
-          </div>
-          <button class="btn" type="submit">Quero receber o pack</button>
-          <p class="privacy">Ao enviar, você autoriza a Alpaca Labs a entrar em contato sobre o material e conteúdos relacionados a aquisição B2B. Nada de spam.</p>
-        </form>
+          <p>Responda algumas perguntas e receba o material aqui na tela.</p>
+          <typebot-standard style="width:100%;height:600px"></typebot-standard>
+        </div>
       </div>
     </section>
   </main>
+
+  <script type="module">
+    import Typebot from 'https://cdn.jsdelivr.net/npm/@typebot.io/js@0/dist/web.js';
+    Typebot.initStandard({ typebot: 'hackalpaca' });
+  </script>
 
   <footer>
     <div class="wrap foot">
