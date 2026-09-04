@@ -9,8 +9,8 @@
     "qa_minutes": 10
   },
   "entrypoint": "linkedin-canal-aquisicao-hacktown.html",
-  "landing_page": "pack-founder-led-growth.html",
-  "lead_url_configuration": "Adicione ?lead=URL_ENCODED ao abrir o HTML para sobrescrever o destino. O padrão atual é https://brandsalpaca.com/pack-founder-led-growth.",
+  "landing_page": "pack/index.html",
+  "lead_url_configuration": "Adicione ?lead=URL_ENCODED ao abrir o HTML para sobrescrever o destino. O padrão atual é https://hacktown.brandsalpaca.com/pack.",
   "controls": {
     "next": ["ArrowRight", "PageDown", "Space"],
     "previous": ["ArrowLeft", "PageUp"],
