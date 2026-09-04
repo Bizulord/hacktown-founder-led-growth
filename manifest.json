@@ -1,0 +1,21 @@
+{
+  "title": "Founder-led Growth",
+  "event": "HackTown 2026",
+  "presenter": "Michell Lech · CMO da Piperz.io · Founder da Alpaca Labs",
+  "format": "HTML 16:9",
+  "slides": 30,
+  "timing": {
+    "content_minutes": 50,
+    "qa_minutes": 10
+  },
+  "entrypoint": "linkedin-canal-aquisicao-hacktown.html",
+  "landing_page": "pack-founder-led-growth.html",
+  "lead_url_configuration": "Adicione ?lead=URL_ENCODED ao abrir o HTML para sobrescrever o destino. O padrão atual é https://brandsalpaca.com/pack-founder-led-growth.",
+  "controls": {
+    "next": ["ArrowRight", "PageDown", "Space"],
+    "previous": ["ArrowLeft", "PageUp"],
+    "fullscreen": "F",
+    "speaker_notes": "N",
+    "overview": "G"
+  }
+}

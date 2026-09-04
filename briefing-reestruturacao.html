@@ -1,0 +1,819 @@
+<title>Briefing HackTown 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap">
+
+<style>
+  /* ---------- tokens: light (bare :root) ---------- */
+  :root{
+    --ink:#0F1219;
+    --ground:#F2F5F9;
+    --surface:#FFFFFF;
+    --surface-2:#E9EEF5;
+    --line:#D2DBE6;
+    --line-soft:#E2E8F0;
+    --text:#141922;
+    --text-2:#4A5768;
+    --text-3:#6B7A8D;
+    --accent:#2F6FE0;
+    --accent-soft:#4C8BF5;
+    --accent-wash:#4C8BF51F;
+    --good:#1E9E5A;
+    --warn:#B27700;
+    --shadow:0 1px 2px rgba(15,18,25,.06), 0 8px 24px rgba(15,18,25,.05);
+
+    /* chart roles */
+    --role-warm:#8FA0B5;
+    --role-method:#4C8BF5;
+    --role-proof:#9BC0FF;
+    --role-action:#2FBF74;
+
+    --measure:68ch;
+    --radius:10px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ground:#0F1219;
+      --surface:#161B26;
+      --surface-2:#1E2535;
+      --line:#2A3346;
+      --line-soft:#212938;
+      --text:#E8ECF1;
+      --text-2:#A9B6C7;
+      --text-3:#6B7A8D;
+      --accent:#7BAAFF;
+      --accent-soft:#4C8BF5;
+      --accent-wash:#4C8BF526;
+      --good:#4ADE80;
+      --warn:#FBBF24;
+      --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 30px rgba(0,0,0,.35);
+
+      --role-warm:#55637A;
+      --role-method:#4C8BF5;
+      --role-proof:#2F5EA8;
+      --role-action:#4ADE80;
+    }
+  }
+  :root[data-theme="dark"]{
+    --ground:#0F1219;
+    --surface:#161B26;
+    --surface-2:#1E2535;
+    --line:#2A3346;
+    --line-soft:#212938;
+    --text:#E8ECF1;
+    --text-2:#A9B6C7;
+    --text-3:#6B7A8D;
+    --accent:#7BAAFF;
+    --accent-soft:#4C8BF5;
+    --accent-wash:#4C8BF526;
+    --good:#4ADE80;
+    --warn:#FBBF24;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 30px rgba(0,0,0,.35);
+
+    --role-warm:#55637A;
+    --role-method:#4C8BF5;
+    --role-proof:#2F5EA8;
+    --role-action:#4ADE80;
+  }
+
+  *{box-sizing:border-box}
+  body{
+    background:var(--ground);
+    color:var(--text);
+    font-family:Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size:17px;
+    line-height:1.62;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1080px;margin:0 auto;padding:0 28px 120px}
+
+  /* ---------- masthead ---------- */
+  .masthead{
+    border-bottom:1px solid var(--line);
+    padding:56px 0 30px;
+    margin-bottom:56px;
+  }
+  .kicker{
+    font-family:"JetBrains Mono", ui-monospace, monospace;
+    font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--accent);font-weight:500;
+    display:flex;flex-wrap:wrap;gap:14px;align-items:center;
+  }
+  .kicker span.sep{color:var(--text-3)}
+  h1{
+    font-size:clamp(38px,6vw,60px);
+    line-height:1.03;letter-spacing:-.033em;font-weight:800;
+    margin:20px 0 0;text-wrap:balance;max-width:16ch;
+  }
+  .standfirst{
+    margin:22px 0 0;max-width:60ch;font-size:19px;color:var(--text-2);
+  }
+  .meta-row{
+    display:flex;flex-wrap:wrap;gap:10px;margin-top:28px;
+    font-family:"JetBrains Mono", ui-monospace, monospace;font-size:12.5px;
+  }
+  .chip{
+    border:1px solid var(--line);border-radius:999px;
+    padding:5px 12px;color:var(--text-2);background:var(--surface);
+  }
+  .chip b{color:var(--text);font-weight:700}
+
+  /* ---------- section scaffolding ---------- */
+  section{margin:0 0 72px}
+  .sec-head{
+    display:flex;align-items:baseline;gap:16px;
+    border-top:1px solid var(--line);padding-top:18px;margin-bottom:26px;
+  }
+  .sec-num{
+    font-family:"JetBrains Mono", ui-monospace, monospace;
+    font-size:12px;color:var(--text-3);letter-spacing:.1em;
+    flex:0 0 auto;padding-top:6px;
+  }
+  h2{
+    font-size:clamp(25px,3.2vw,32px);letter-spacing:-.022em;font-weight:700;
+    margin:0;text-wrap:balance;
+  }
+  h3{
+    font-size:19px;letter-spacing:-.012em;font-weight:650;margin:0 0 6px;
+  }
+  p{margin:0 0 16px;max-width:var(--measure)}
+  .lede{font-size:18.5px;color:var(--text-2);max-width:62ch}
+  strong{font-weight:650;color:var(--text)}
+  em.q{font-style:normal;color:var(--text);background:var(--accent-wash);
+    padding:1px 5px;border-radius:4px;box-decoration-break:clone}
+  a{color:var(--accent)}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+
+  code, .mono{font-family:"JetBrains Mono", ui-monospace, monospace;font-size:.88em}
+  code{background:var(--surface-2);padding:2px 6px;border-radius:5px;color:var(--text)}
+
+  /* ---------- verdict panel ---------- */
+  .verdict{
+    background:var(--surface);border:1px solid var(--line);
+    border-left:3px solid var(--accent-soft);
+    border-radius:var(--radius);padding:26px 28px;box-shadow:var(--shadow);
+  }
+  .verdict p:last-child{margin-bottom:0}
+  .verdict .label{
+    font-family:"JetBrains Mono", ui-monospace, monospace;font-size:11.5px;
+    letter-spacing:.13em;text-transform:uppercase;color:var(--text-3);margin-bottom:10px;
+  }
+
+  /* ---------- decision cards ---------- */
+  .spines{display:grid;gap:16px;margin-top:8px}
+  .spine{
+    background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+    padding:22px 24px;display:grid;grid-template-columns:auto 1fr;gap:0 18px;
+  }
+  .spine.rec{border-color:var(--accent-soft);box-shadow:var(--shadow)}
+  .spine-mark{
+    font-family:"JetBrains Mono", ui-monospace, monospace;font-size:12px;
+    color:var(--text-3);padding-top:5px;
+  }
+  .spine.rec .spine-mark{color:var(--accent)}
+  .spine-quote{
+    font-size:21px;font-weight:650;letter-spacing:-.016em;line-height:1.32;
+    margin:0 0 10px;max-width:34ch;
+  }
+  .spine-body{grid-column:2}
+  .spine-body p{margin:0;color:var(--text-2);max-width:58ch;font-size:16px}
+  .tag{
+    display:inline-block;margin-top:12px;
+    font-family:"JetBrains Mono", ui-monospace, monospace;font-size:11px;
+    letter-spacing:.1em;text-transform:uppercase;
+    color:var(--accent);border:1px solid var(--accent-soft);
+    padding:3px 9px;border-radius:999px;
+  }
+
+  /* ---------- timeline chart ---------- */
+  .chart{margin:8px 0 0}
+  .chart-row{margin-bottom:26px}
+  .chart-label{
+    display:flex;justify-content:space-between;align-items:baseline;gap:12px;
+    font-family:"JetBrains Mono", ui-monospace, monospace;font-size:12px;
+    letter-spacing:.08em;text-transform:uppercase;color:var(--text-3);margin-bottom:9px;
+  }
+  .chart-label b{color:var(--text);font-weight:700;letter-spacing:.04em}
+  .bar{
+    display:flex;width:100%;height:46px;border-radius:6px;overflow:hidden;
+    border:1px solid var(--line);background:var(--surface-2);
+  }
+  .seg{
+    display:flex;align-items:center;justify-content:center;
+    font-family:"JetBrains Mono", ui-monospace, monospace;
+    font-size:12px;font-weight:700;color:#0F1219;
+    border-right:1px solid var(--ground);overflow:hidden;white-space:nowrap;
+  }
+  .seg:last-child{border-right:0}
+  .seg.warm{background:var(--role-warm)}
+  .seg.method{background:var(--role-method)}
+  .seg.proof{background:var(--role-proof)}
+  .seg.action{background:var(--role-action)}
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]) .seg.proof{color:#E8ECF1}
+    :root:not([data-theme="light"]) .seg.warm{color:#E8ECF1}
+  }
+  :root[data-theme="dark"] .seg.proof{color:#E8ECF1}
+  :root[data-theme="dark"] .seg.warm{color:#E8ECF1}
+
+  .axis{
+    display:flex;justify-content:space-between;
+    font-family:"JetBrains Mono", ui-monospace, monospace;
+    font-size:11.5px;color:var(--text-3);margin-top:7px;
+  }
+  .legend{
+    display:flex;flex-wrap:wrap;gap:18px;margin-top:22px;
+    font-size:14px;color:var(--text-2);
+  }
+  .legend div{display:flex;align-items:center;gap:8px}
+  .swatch{width:13px;height:13px;border-radius:3px;flex:0 0 auto}
+  .delta{
+    margin-top:26px;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+    gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--radius);
+    overflow:hidden;
+  }
+  .delta div{background:var(--surface);padding:16px 18px}
+  .delta dt{
+    font-family:"JetBrains Mono", ui-monospace, monospace;font-size:11px;
+    letter-spacing:.11em;text-transform:uppercase;color:var(--text-3);margin-bottom:7px;
+  }
+  .delta dd{margin:0;font-size:22px;font-weight:700;letter-spacing:-.02em;
+    font-variant-numeric:tabular-nums}
+  .delta dd .arrow{color:var(--text-3);font-weight:500;margin:0 5px}
+  .delta dd .up{color:var(--good)}
+  .delta dd .down{color:var(--text-2)}
+
+  /* ---------- run-of-show table ---------- */
+  .scroller{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface)}
+  table{border-collapse:collapse;width:100%;font-size:15.5px;min-width:560px}
+  th,td{text-align:left;padding:12px 16px;border-bottom:1px solid var(--line-soft);vertical-align:top}
+  thead th{
+    font-family:"JetBrains Mono", ui-monospace, monospace;font-size:11px;
+    letter-spacing:.11em;text-transform:uppercase;color:var(--text-3);font-weight:500;
+    background:var(--surface-2);border-bottom:1px solid var(--line);
+  }
+  tbody tr:last-child td{border-bottom:0}
+  td.t{font-family:"JetBrains Mono", ui-monospace, monospace;font-size:13.5px;
+    color:var(--text-2);white-space:nowrap;font-variant-numeric:tabular-nums}
+  td.n{font-family:"JetBrains Mono", ui-monospace, monospace;font-size:13.5px;
+    white-space:nowrap;font-variant-numeric:tabular-nums;color:var(--text-2)}
+  .new{color:var(--good);font-weight:600}
+  .cut{color:var(--text-3);text-decoration:line-through}
+
+  /* ---------- principles ---------- */
+  .principles{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+  .principle{
+    background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+    padding:22px 24px;
+  }
+  .principle h3{margin-bottom:8px}
+  .principle p{font-size:15.5px;color:var(--text-2);margin:0 0 12px;max-width:none}
+  .principle p:last-child{margin-bottom:0}
+  .applies{
+    border-top:1px dashed var(--line);padding-top:12px;margin-top:14px;
+    font-size:14.5px;color:var(--text-2);
+  }
+  .applies b{
+    font-family:"JetBrains Mono", ui-monospace, monospace;font-size:10.5px;
+    letter-spacing:.12em;text-transform:uppercase;color:var(--accent);
+    display:block;margin-bottom:5px;font-weight:500;
+  }
+
+  /* ---------- findings ---------- */
+  .finding{
+    display:grid;grid-template-columns:52px 1fr;gap:0 20px;
+    padding:24px 0;border-top:1px solid var(--line-soft);
+  }
+  .finding:first-of-type{border-top:1px solid var(--line)}
+  .f-num{
+    font-family:"JetBrains Mono", ui-monospace, monospace;
+    font-size:22px;font-weight:700;color:var(--text-3);
+    letter-spacing:-.02em;padding-top:2px;font-variant-numeric:tabular-nums;
+  }
+  .finding.crit .f-num{color:var(--accent)}
+  .f-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px;margin-bottom:8px}
+  .f-head h3{margin:0}
+  .slideref{
+    font-family:"JetBrains Mono", ui-monospace, monospace;font-size:11px;
+    letter-spacing:.08em;text-transform:uppercase;color:var(--text-3);
+    border:1px solid var(--line);border-radius:999px;padding:2px 9px;white-space:nowrap;
+  }
+  .sev{
+    font-family:"JetBrains Mono", ui-monospace, monospace;font-size:10.5px;
+    letter-spacing:.12em;text-transform:uppercase;padding:2px 9px;border-radius:999px;
+    white-space:nowrap;font-weight:500;
+  }
+  .sev.c{background:var(--accent-wash);color:var(--accent);border:1px solid var(--accent-soft)}
+  .sev.m{border:1px solid var(--line);color:var(--text-3)}
+  .finding p{font-size:16px;color:var(--text-2)}
+  .fix{
+    background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--good);
+    border-radius:8px;padding:14px 18px;margin-top:14px;font-size:15.5px;color:var(--text-2);
+    max-width:var(--measure);
+  }
+  .fix b{
+    font-family:"JetBrains Mono", ui-monospace, monospace;font-size:10.5px;
+    letter-spacing:.12em;text-transform:uppercase;color:var(--good);
+    display:block;margin-bottom:6px;font-weight:500;
+  }
+
+  /* ---------- ratio note ---------- */
+  .ratios{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1px;
+    background:var(--line);border:1px solid var(--line);border-radius:var(--radius);
+    overflow:hidden;margin:16px 0 0;max-width:var(--measure);
+  }
+  .ratios div{background:var(--surface);padding:15px 17px}
+  .ratios .case{
+    font-family:"JetBrains Mono", ui-monospace, monospace;font-size:11.5px;
+    color:var(--text-3);letter-spacing:.06em;margin-bottom:8px;
+  }
+  .ratios .rate{font-size:20px;font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+  .ratios .sub{font-size:13.5px;color:var(--text-2);margin-top:3px}
+
+  /* ---------- checklist / open items ---------- */
+  .todo{list-style:none;padding:0;margin:0;max-width:var(--measure)}
+  .todo li{
+    display:grid;grid-template-columns:auto 1fr;gap:14px;
+    padding:14px 0;border-bottom:1px solid var(--line-soft);font-size:16px;color:var(--text-2);
+  }
+  .todo li:last-child{border-bottom:0}
+  .box{
+    width:17px;height:17px;border:1.5px solid var(--text-3);border-radius:4px;
+    margin-top:4px;flex:0 0 auto;
+  }
+  .todo li b{color:var(--text);font-weight:600}
+
+  .steps{list-style:none;counter-reset:s;padding:0;margin:0;max-width:var(--measure)}
+  .steps li{
+    counter-increment:s;position:relative;padding:0 0 22px 46px;font-size:16px;color:var(--text-2);
+  }
+  .steps li::before{
+    content:counter(s,decimal-leading-zero);position:absolute;left:0;top:1px;
+    font-family:"JetBrains Mono", ui-monospace, monospace;font-size:12px;font-weight:700;
+    color:var(--accent);border:1px solid var(--accent-soft);border-radius:6px;
+    width:30px;height:26px;display:flex;align-items:center;justify-content:center;
+  }
+  .steps li b{color:var(--text);font-weight:650}
+
+  footer{
+    border-top:1px solid var(--line);margin-top:20px;padding-top:24px;
+    font-family:"JetBrains Mono", ui-monospace, monospace;font-size:12px;
+    color:var(--text-3);display:flex;flex-wrap:wrap;gap:8px 20px;
+  }
+
+  @media (max-width:640px){
+    body{font-size:16px}
+    .wrap{padding:0 18px 80px}
+    .finding{grid-template-columns:1fr;gap:8px}
+    .f-num{font-size:15px;padding-top:0}
+    .spine{grid-template-columns:1fr}
+    .spine-body{grid-column:1}
+    .seg{font-size:0}
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="kicker">
+      <span>Alpaca Labs</span><span class="sep">/</span>
+      <span>HackTown 2026</span><span class="sep">/</span>
+      <span>briefing de reestruturação</span>
+    </div>
+    <h1>Briefing HackTown 2026</h1>
+    <p class="standfirst">Revisão de <code>linkedin-canal-aquisicao-hacktown.html</code> — o que fazer com os 50 minutos, o que torna a palestra memorável, e a decisão que precisa ser tomada antes de qualquer edição no deck.</p>
+    <div class="meta-row">
+      <span class="chip"><b>27</b> slides hoje</span>
+      <span class="chip"><b>50</b> min conteúdo</span>
+      <span class="chip"><b>10</b> min Q&amp;A</span>
+      <span class="chip">Michell Lech</span>
+      <span class="chip">deck ainda <b>não alterado</b></span>
+      <span class="chip"><b>+4</b> entradas · adendo 03/09</span>
+    </div>
+  </header>
+
+  <section>
+    <div class="verdict">
+      <div class="label">Veredito em três frases</div>
+      <p>A lógica do deck <strong>faz sentido</strong>: a cadeia autoridade → intenção → conversa → pipeline é coerente e a sequência dos slides a respeita.</p>
+      <p>O que impede resultado para a plateia são duas coisas: <strong>o tempo está alocado para provar a Alpaca, não para equipar a sala</strong> — e a parte acionável, que é o que a pessoa levaria para casa, vai ser atropelada nos últimos 4 minutos.</p>
+      <p>E os cases, hoje, <strong>provam o fornecedor em vez do método</strong> — sem janela de tempo, sem ligação com o framework.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <div class="sec-num">01</div>
+      <h2>A decisão que trava tudo</h2>
+    </div>
+    <p class="lede">Uma palestra memorável tem <strong>uma ideia e oito provas</strong> — não nove ideias competindo. O deck hoje tem nove candidatas ao posto principal. Escolher a espinha é o que define todos os cortes; sem isso, qualquer edição é chute.</p>
+    <p>As três candidatas abaixo saíram do seu próprio material. Não são invenção — são frases que já estão no deck, hoje em posição de apoio.</p>
+
+    <div class="spines">
+      <div class="spine rec">
+        <div class="spine-mark">A</div>
+        <div>
+          <p class="spine-quote">“Publicar mais não gera pipeline. Fechar o circuito gera.”</p>
+        </div>
+        <div class="spine-body">
+          <p>Hoje está no slide 18 como <em class="q">exemplo de hook ruim vs. bom</em> — “Publicar mais foi o que travou nosso pipeline.” É a melhor frase do deck e está sendo usada como ilustração. Como espinha, ela é desconfortável na abertura (a plateia não concorda de graça) e o deck inteiro vira prova: perfil, conteúdo, intenção, conversa, receita são as cinco partes do circuito.</p>
+          <span class="tag">recomendada — aproveita 100% do conteúdo existente</span>
+        </div>
+      </div>
+
+      <div class="spine">
+        <div class="spine-mark">B</div>
+        <div>
+          <p class="spine-quote">“Você não precisa de audiência. Precisa de 30 pessoas certas.”</p>
+        </div>
+        <div class="spine-body">
+          <p>Vem do case de R$ 200 mil (102 leads → 10 clientes, a melhor taxa dos três). Esse case vira o pico da palestra em vez de ser o terceiro slide de uma sequência saturada. É a espinha que mais fala com a plateia early-stage do HackTown, que é justamente quem não tem audiência. Custo: exige recortar o bloco de algoritmo com mais agressividade, porque alcance deixa de ser o assunto.</p>
+        </div>
+      </div>
+
+      <div class="spine">
+        <div class="spine-mark">C</div>
+        <div>
+          <p class="spine-quote">“Seu perfil é a página de vendas que você nunca escreveu.”</p>
+        </div>
+        <div class="spine-body">
+          <p>A mais acionável e a que melhor sustenta o exercício ao vivo — a fórmula já está na tela no slide 14. Ganha em memória e em conversão de QR. Perde em cobertura: deixa órfãos os blocos de conteúdo, medição e mídia paga, que passariam a parecer apêndices.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <div class="sec-num">02</div>
+      <h2>O orçamento de 50 minutos</h2>
+    </div>
+    <p class="lede">Este é o achado central. Cada bloco abaixo está desenhado na escala real dos 50 minutos, somado a partir dos atributos <code>data-time</code> do próprio deck.</p>
+
+    <div class="chart">
+      <div class="chart-row">
+        <div class="chart-label"><b>Hoje</b><span>27 slides · 50 min</span></div>
+        <div class="bar" role="img" aria-label="Alocação atual: 8 minutos de aquecimento, 3 de credibilidade, 27 de método, 8 de cases, 4 de ação.">
+          <div class="seg warm"  style="width:16%">8</div>
+          <div class="seg proof" style="width:6%">3</div>
+          <div class="seg method" style="width:54%">27</div>
+          <div class="seg proof" style="width:16%">8</div>
+          <div class="seg action" style="width:8%">4</div>
+        </div>
+        <div class="axis"><span>0 min</span><span>10</span><span>20</span><span>30</span><span>40</span><span>50</span></div>
+      </div>
+
+      <div class="chart-row">
+        <div class="chart-label"><b>Proposto</b><span>50 min · mesma duração</span></div>
+        <div class="bar" role="img" aria-label="Alocação proposta: 5 minutos de aquecimento, 1 de credibilidade, 24 de método, 7 de cases, 13 de ação.">
+          <div class="seg warm"  style="width:10%">5</div>
+          <div class="seg proof" style="width:2%">1</div>
+          <div class="seg method" style="width:48%">24</div>
+          <div class="seg proof" style="width:14%">7</div>
+          <div class="seg action" style="width:26%">13</div>
+        </div>
+        <div class="axis"><span>0 min</span><span>10</span><span>20</span><span>30</span><span>40</span><span>50</span></div>
+      </div>
+
+      <div class="legend">
+        <div><span class="swatch" style="background:var(--role-warm)"></span> Aquecimento e tese</div>
+        <div><span class="swatch" style="background:var(--role-method)"></span> Método — o que você ensina</div>
+        <div><span class="swatch" style="background:var(--role-proof)"></span> Prova — bio, logos, cases</div>
+        <div><span class="swatch" style="background:var(--role-action)"></span> Ação — o que a plateia faz</div>
+      </div>
+
+      <dl class="delta">
+        <div>
+          <dt>Ação para a plateia</dt>
+          <dd>4 <span class="arrow">→</span> <span class="up">13 min</span></dd>
+        </div>
+        <div>
+          <dt>Provar a Alpaca</dt>
+          <dd>11 <span class="arrow">→</span> <span class="down">8 min</span></dd>
+        </div>
+        <div>
+          <dt>Bloco de algoritmo</dt>
+          <dd>7 <span class="arrow">→</span> <span class="down">4 min</span></dd>
+        </div>
+        <div>
+          <dt>Bio + logos</dt>
+          <dd>3 <span class="arrow">→</span> <span class="down">1 min</span></dd>
+        </div>
+      </dl>
+    </div>
+
+    <p style="margin-top:34px">Dito em uma frase: hoje são <strong>11 minutos provando que a Alpaca é boa e 4 dizendo à plateia o que fazer</strong>. E esses 4 minutos são os mais densos do deck — o slide 25 traz benchmark de Thought Leader Ads, fórmula e recomendação de budget em 60 segundos; o slide 26 tem 6 itens de checklist em 30 segundos. Na prática você estoura o tempo e essa parte vira atropelo.</p>
+
+    <p>Há também uma incoerência de forma: você ensina <em class="q">entregue valor antes de pedir o clique</em> e <em class="q">autoridade precede conversão</em>. Uma palestra que gasta 22% do tempo em vitrine contradiz, no formato, a tese que defende no conteúdo. Cortar não é só questão de relógio — é coerência com o próprio método.</p>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <div class="sec-num">03</div>
+      <h2>Run of show proposto</h2>
+    </div>
+    <p class="lede">Mesmos 50 minutos, redistribuídos. As linhas em verde são novas; os cortes estão indicados. Válido para a espinha A — as espinhas B e C mudam a ordem dos blocos de prova.</p>
+
+    <div class="scroller">
+      <table>
+        <thead>
+          <tr><th>Min</th><th>Bloco</th><th style="width:42%">O que muda</th><th>Δ</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="t">00–05</td><td>Abertura + a virada</td><td>Leitura de sala enxuta (2 min, não 4). A tese desconfortável entra aqui, no lugar de “LinkedIn não é rede social”.</td><td class="n">8 → 5</td></tr>
+          <tr><td class="t">05–06</td><td>Por que eu</td><td>Bio e logos comprimidos num slide só. Credencial suficiente para responder “por que ouvir você”, nada além.</td><td class="n">3 → 1</td></tr>
+          <tr><td class="t">06–09</td><td>O sistema (o mapa)</td><td>Igual — mas agora vira marcador de progresso recorrente no resto do deck.</td><td class="n">3 → 3</td></tr>
+          <tr><td class="t">09–14</td><td>ICP + comitê de compra</td><td>Sem alteração de conteúdo.</td><td class="n">5 → 5</td></tr>
+          <tr><td class="t">14–20</td><td>Perfil + <span class="new">exercício ao vivo</span></td><td><span class="new">90 segundos de “escreve a sua headline agora, no celular”.</span> A fórmula já está na tela. Este é o pico planejado.</td><td class="n">5 → 6</td></tr>
+          <tr><td class="t">20–26</td><td>Conteúdo: 70/20/10, cadência, hooks</td><td>Adicionar uma linha defendendo o 70% fundo de funil. Hoje só afirma.</td><td class="n">7 → 6</td></tr>
+          <tr><td class="t">26–30</td><td>Algoritmo 2026</td><td>Comprimido para 2 slides e <strong>movido para depois de hooks</strong> — vira “como isso é distribuído”, que é a pergunta natural nesse ponto.</td><td class="n">7 → 4</td></tr>
+          <tr><td class="t">30–37</td><td>Cases</td><td>Um case <strong>contado como cena</strong> (3 min), um de contraste em tela (2 min), Ian reenquadrado (2 min). <span class="cut">Terceiro case Alpaca</span> cortado.</td><td class="n">8 → 7</td></tr>
+          <tr><td class="t">37–39</td><td><span class="new">Honestidade custosa</span> (novo)</td><td><span class="new">Prazo real, custo real, para quem isto não serve.</span> O slide de maior ROI de confiança — e hoje inexistente.</td><td class="n">0 → 2</td></tr>
+          <tr><td class="t">39–42</td><td>Intenção → DM</td><td>Sem alteração de conteúdo, com respiro.</td><td class="n">1,5 → 3</td></tr>
+          <tr><td class="t">42–45</td><td>Medição</td><td>Sem alteração de conteúdo, com respiro.</td><td class="n">1 → 3</td></tr>
+          <tr><td class="t">45–47</td><td>Orgânico + pago</td><td>Sem alteração de conteúdo, com respiro.</td><td class="n">1 → 2</td></tr>
+          <tr><td class="t">47–50</td><td>Próximos 7 dias</td><td>Cada item rotulado com a frustração do slide 3 que ele resolve. Fecha os loops abertos na abertura.</td><td class="n">0,5 → 3</td></tr>
+          <tr><td class="t">50–60</td><td>Q&amp;A</td><td>—</td><td class="n">10</td></tr>
+          <tr><td class="t">+0:30</td><td><span class="new">Retomada final</span> (novo)</td><td><span class="new">Você volta ao palco depois do Q&amp;A.</span> Uma frase e o QR. Hoje a última coisa que a sala leva é a pergunta de um desconhecido.</td><td class="n">novo</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <div class="sec-num">04</div>
+      <h2>O que torna uma palestra memorável</h2>
+    </div>
+    <p class="lede">Os princípios, cada um já traduzido para o que ele implica neste deck. Não é uma sequência — é o conjunto de critérios contra o qual as decisões da seção 03 foram tomadas.</p>
+
+    <div class="principles">
+      <div class="principle">
+        <h3>Memória é episódica</h3>
+        <p>No dia seguinte ninguém recupera bullets. Recupera cenas: gente com nome, tensão, uma virada. A unidade mínima de uma palestra memorável é uma cena, não um conceito.</p>
+        <div class="applies"><b>No seu deck</b>27 slides, zero cenas. Os cases são a matéria-prima perfeita e estão como tabela: 177 → 27 → 16 → 4. Um case contado vale mais que três exibidos.</div>
+      </div>
+
+      <div class="principle">
+        <h3>Uma ideia, oito provas</h3>
+        <p>Teste: se alguém sair e o colega perguntar “do que era?”, qual é a frase? A pessoa só carrega uma. Nove ideias na cabeça de alguém viram zero.</p>
+        <div class="applies"><b>No seu deck</b>Nove candidatas competindo. Ver seção 01 — é a decisão que trava tudo.</div>
+      </div>
+
+      <div class="principle">
+        <h3>A virada precisa incomodar</h3>
+        <p>O momento que faz a palestra é aquele em que o modelo mental inverte. Concordância imediata não gera memória — se a plateia concorda antes de você terminar a frase, não houve virada.</p>
+        <div class="applies"><b>No seu deck</b>“LinkedIn não é rede social” já não é polêmico em 2026. Suas viradas reais (publicar mais travou o pipeline; 70% fundo de funil; audiência menor deu R$ 200 mil) estão todas em slides de apoio.</div>
+      </div>
+
+      <div class="principle">
+        <h3>Honestidade custosa compra confiança</h3>
+        <p>O que a plateia não espera de quem vende: o que não funciona, quanto tempo demora, o que você errou, para quem não serve. É o momento em que você tem mais a perder e fala mesmo assim.</p>
+        <div class="applies"><b>No seu deck</b>100% upside. Nenhum slide de custo ou prazo. É também por isso que os cases sem janela de tempo soam infalsificáveis.</div>
+      </div>
+
+      <div class="principle">
+        <h3>Pico e fim</h3>
+        <p>As pessoas não avaliam a média da experiência — avaliam o momento mais intenso e o final (Kahneman). Quase toda palestra desperdiça o fim.</p>
+        <div class="applies"><b>No seu deck</b>Sem pico projetado. E o fim hoje pertence ao último a levantar a mão no Q&amp;A. Correção: exercício ao vivo como pico (~min 20) e retomada de 30 s depois do Q&amp;A.</div>
+      </div>
+
+      <div class="principle">
+        <h3>Quem faz, lembra</h3>
+        <p>Efeito de geração: o que a pessoa produz sozinha fixa muito mais do que o que ela ouve. E num festival, muda o estado da sala.</p>
+        <div class="applies"><b>No seu deck</b>A fórmula já está no slide 14. 90 segundos de escrita ao vivo criam o pico, a memória e a reciprocidade que faz o QR converter — tudo de uma vez.</div>
+      </div>
+
+      <div class="principle">
+        <h3>Mudança de estado a cada 8–10 min</h3>
+        <p>Cinquenta minutos são cerca de cinco ciclos de atenção. Cada ciclo precisa de uma quebra: história, pergunta, exercício, silêncio, imagem real.</p>
+        <div class="applies"><b>No seu deck</b>Interação nos minutos 1–5 e nada depois. Densidade uniforme produz esquecimento uniforme.</div>
+      </div>
+
+      <div class="principle">
+        <h3>Memorável pelo motivo certo</h3>
+        <p>Ser lembrado como “que palestrante bom” não gera reunião. O critério real é a frase que a pessoa diz a um colega no corredor.</p>
+        <div class="applies"><b>No seu deck</b>A frase que você quer: <em class="q">foi o cara que me mostrou que meu perfil parecia currículo — reescrevi a headline ali na hora.</em> Isso é lead. “Palestra boa” não é.</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <div class="sec-num">05</div>
+      <h2>Achados da revisão do deck</h2>
+    </div>
+    <p class="lede">Em ordem de impacto. As referências apontam para o número do slide no arquivo atual.</p>
+
+    <div class="finding crit">
+      <div class="f-num">01</div>
+      <div>
+        <div class="f-head"><h3>Orçamento de tempo invertido</h3><span class="sev c">crítico</span><span class="slideref">slides 23–26</span></div>
+        <p>Detalhado na seção 02. A parte acionável tem 8% do tempo e a maior densidade por minuto do deck.</p>
+      </div>
+    </div>
+
+    <div class="finding crit">
+      <div class="f-num">02</div>
+      <div>
+        <div class="f-head"><h3>Cases sem janela de tempo</h3><span class="sev c">crítico</span><span class="slideref">slides 19–21</span></div>
+        <p>“177 leads” em 3 meses ou em 18? Este é o número mais importante que falta no deck inteiro. Sem ele o case é infalsificável e a plateia desconta mentalmente. Colocar o prazo não enfraquece — é exatamente o tipo de honestidade que torna o número crível.</p>
+        <div class="fix"><b>Correção</b>Adicionar o período em cada case. Preciso desse dado de você — ver seção 07.</div>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="f-num">03</div>
+      <div>
+        <div class="f-head"><h3>Três cases seguidos dizem a mesma coisa</h3><span class="sev c">alto</span><span class="slideref">slides 19–21</span></div>
+        <p>Layout idêntico, mesma mensagem. E lidos juntos, os números trabalham contra você — o case que abre o bloco é o pior em toda taxa de conversão, e os tickets variam 5× sem explicação:</p>
+        <div class="ratios">
+          <div><div class="case">R$ 400 mil</div><div class="rate">2,3%</div><div class="sub">177 → 4 · ~R$ 100k/cliente</div></div>
+          <div><div class="case">R$ 450 mil</div><div class="rate">2,1%</div><div class="sub">698 → 15 · ~R$ 30k/cliente</div></div>
+          <div><div class="case">R$ 200 mil</div><div class="rate">9,8%</div><div class="sub">102 → 10 · ~R$ 20k/cliente</div></div>
+        </div>
+        <div class="fix"><b>Correção</b>Dois cases: um contado como cena, um de contraste. Somado ao achado 02, o bloco vira prova do método em vez de vitrine. Economia: ~2 min.</div>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="f-num">04</div>
+      <div>
+        <div class="f-head"><h3>Os cases provam o fornecedor, não o método</h3><span class="sev c">alto</span><span class="slideref">slides 19–21</span></div>
+        <p>Mostram resultado, mas não mostram qual etapa do sistema produziu o quê. A plateia aprende “a Alpaca entrega”, não “eis o mecanismo que eu copio”. Para uma palestra cujo objetivo é gerar lead, isso é ruim duas vezes: não ensina e soa a pitch.</p>
+        <div class="fix"><b>Correção</b>Anotar cada case com os passos do fluxo do slide 8 — posicionamento → conteúdo → intenção → conversa.</div>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="f-num">05</div>
+      <div>
+        <div class="f-head"><h3>O mapa do slide 8 nunca mais é usado</h3><span class="sev m">médio</span><span class="slideref">slide 8 + data-section</span></div>
+        <p>O fluxo tem 5 passos (Posicionamento · Conteúdo · Intenção · Conversa · Pipeline) e o deck de fato os segue — mas os <code>data-section</code> usam outra taxonomia inteira (Fundação, Perfil, Conteúdo, Conversão, Mensuração, Escala, Execução). São dois vocabulários concorrentes para a mesma espinha, e a plateia nunca ouve “estamos no passo 3”.</p>
+        <div class="fix"><b>Correção</b>Alinhar os <code>data-section</code> aos 5 passos e colocar marcador de progresso do fluxo nos slides de conteúdo.</div>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="f-num">06</div>
+      <div>
+        <div class="f-head"><h3>O bloco de algoritmo interrompe o mapa</h3><span class="sev m">médio</span><span class="slideref">slides 9–11</span></div>
+        <p>Sete minutos (14%) no conteúdo que envelhece mais rápido — e posicionado de forma que você mostra o sistema no slide 8, some por 7 minutos falando de feed, e só então volta ao passo 1. Há ainda um atrito não resolvido: o slide 10 afirma <em class="q">≈60% de queda com link externo no corpo</em>, o slide 17 lista LINK como formato recomendado e o slide 25 recomenda mídia paga.</p>
+        <div class="fix"><b>Correção</b>Comprimir para 2 slides (4 min) e mover para depois de Hooks. Adicionar a linha que reconcilia o link — primeiro comentário vs. corpo do post.</div>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="f-num">07</div>
+      <div>
+        <div class="f-head"><h3>O slide do Ian contradiz dois slides seus</h3><span class="sev m">médio</span><span class="slideref">slide 22 vs. 21 e 24</span></div>
+        <p>Ele entra logo depois de “Audiência menor. ~R$ 200 mil” liderando com <strong>33k seguidores, 8,4k inscritos, 645 reações</strong> — a plateia conclui “ah, ele já tinha 33k” e a tese que você acabou de provar desmonta. Pior: essas são exatamente as métricas de vaidade que o slide 24 manda parar de usar. Você mostra 645 reações no minuto 45 e condena reações no minuto 48.</p>
+        <div class="fix"><b>Correção</b>Promover <strong>“70+ pessoas pedindo conversa”</strong> a métrica principal e rebaixar as outras três a contexto — é a única ali alinhada à sua própria tese. Ou cortar o slide.</div>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="f-num">08</div>
+      <div>
+        <div class="f-head"><h3>As três frustrações da abertura nunca são fechadas</h3><span class="sev m">médio</span><span class="slideref">slide 3 → slide 26</span></div>
+        <p>O slide 3 abre três loops — ninguém respondeu / likes mas não leads / parei por falta de tempo — e eles casam exatamente com três respostas do deck: ICP+perfil, intenção+DM, cadência de 1–3 posts. O fechamento nunca volta neles.</p>
+        <div class="fix"><b>Correção</b>Rotular cada item do checklist final com a frustração que resolve. Custo zero, e é o que transforma “boa palestra” em “ele respondeu a minha pergunta”.</div>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="f-num">09</div>
+      <div>
+        <div class="f-head"><h3>O QR aponta para a home e só aparece no minuto 50</h3><span class="sev m">médio</span><span class="slideref">slide 27</span></div>
+        <p>A promessa na tela é <em class="q">receba o próximo framework de aquisição</em>, mas o destino padrão é <code>brandsalpaca.com</code> — a home. Promessa e destino não batem, e isso derruba conversão. Num festival, boa parte da sala já saiu ou está no celular quando o QR aparece.</p>
+        <div class="fix"><b>Correção</b><code>?lead=</code> apontando para uma landing dedicada com o material da palestra, e um segundo QR a partir do bloco de cases (~min 37).</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <div class="sec-num">06</div>
+      <h2>Correções pontuais</h2>
+    </div>
+    <ul class="todo">
+      <li><span class="box"></span><span><b>“50/10” aparece com três significados.</b> No mock de perfil do slide 14 há <code>FRAMEWORK 50/10</code>, nunca explicado; a nota do slide 16 já precisa desambiguar de 70/20/10; e 50/10 também é o formato da sessão. Sugestão: remover do mock.</span></li>
+      <li><span class="box"></span><span><b>70/20/10 invertido não é defendido.</b> Você propõe 70% fundo de funil, contrariando a pirâmide clássica. É defensável em founder-led B2B, mas o slide só afirma. Uma linha resolve: “porque você não precisa de audiência, precisa de compradores”.</span></li>
+      <li><span class="box"></span><span><b>O <code>11+5</code> do case de R$ 400 mil não é um estágio.</b> Está no mesmo grid que leads / qualificados / reuniões, mas 11+5 = 16 = as próprias reuniões. Lê como decomposição disfarçada de etapa. Mover para sublabel.</span></li>
+      <li><span class="box"></span><span><b>Nada para quem ainda não tem case.</b> Boa parte da plateia do HackTown é founder early sem resultado para publicar — e 70% do mix proposto é fundo de funil. Uma linha sobre o que fazer nesse caso segura meia sala.</span></li>
+      <li><span class="box"></span><span><b>O timer começa no <code>load</code>.</b> Se você abrir o deck 10 minutos antes de subir ao palco, ele sobe marcando 10:00. Vale uma tecla de reset ou zerar no primeiro avanço.</span></li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <div class="sec-num">07</div>
+      <h2>O que preciso de você</h2>
+    </div>
+    <p class="lede">Três respostas destravam a reestruturação inteira.</p>
+    <ol class="steps">
+      <li><b>A espinha: A, B ou C.</b> Seção 01. Recomendação: <strong>A</strong> — aproveita todo o conteúdo que já existe e promove a sua melhor frase à abertura.</li>
+      <li><b>A janela de tempo de cada case.</b> Em quantos meses os 177 / 698 / 102 leads foram gerados. Sem isso o achado 02 fica aberto e eu não invento o número.</li>
+      <li><b>A URL da landing da palestra.</b> Para o QR via <code>?lead=</code>. Se ainda não existe, o deck fica no padrão e a gente marca como pendência.</li>
+    </ol>
+    <p style="margin-top:22px">Com isso definido eu edito o HTML em duas levas: primeiro as estruturais — realocação de tempo, corte de um case, movimentação do bloco de algoritmo, alinhamento das seções ao fluxo, slide de honestidade, exercício ao vivo e retomada final. Depois os ajustes finos de texto e as correções pontuais da seção 06.</p>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <div class="sec-num">08</div>
+      <h2>Adendo de 03/09 — quatro entradas novas</h2>
+    </div>
+    <p class="lede">Material que chegou depois da revisão de ontem: o conceito que dá título à palestra, um case novo, dois perfis reais e uma fonte externa sobre canais na era da IA. Os quatro se encaixam em buracos que a seção 05 já tinha aberto.</p>
+
+    <div class="finding crit">
+      <div class="f-num">10</div>
+      <div>
+        <div class="f-head"><h3>“Founder-led Growth” nunca é dito no palco</h3><span class="sev c">crítico</span><span class="slideref">slide 4 · título do evento</span></div>
+        <p>O título oficial na programação do HackTown é <em class="q">Founder-Led Growth: como transformar seu perfil pessoal no LinkedIn em um canal de aquisição</em>, e a descrição da atividade promete que você <em class="q">apresenta o conceito de Founder-led Growth</em>. No deck o termo aparece duas vezes, ambas de passagem: na legenda dos logos e dentro do template de DM do slide 23. Não existe um slide que nomeie e defina o conceito.</p>
+        <p>Quem entrou na sala pelo título espera ouvir o nome nos primeiros cinco minutos. Se não ouvir, a palestra é boa mas responde a outra chamada — e é a chamada que a pessoa usou para decidir entrar.</p>
+        <div class="fix"><b>Correção</b>O slide 4 (“LinkedIn não é rede social”) já foi marcado no achado da seção 04 como uma virada que não vira mais — a plateia concorda de graça em 2026. É o lugar exato: ele passa a nomear e definir Founder-led Growth, e a definição carrega a tese em vez de uma obviedade. Custo: zero slide novo, zero minuto novo.</div>
+      </div>
+    </div>
+
+    <div class="finding crit">
+      <div class="f-num">11</div>
+      <div>
+        <div class="f-head"><h3>O case da Mari é a cena que faltava</h3><span class="sev c">crítico</span><span class="slideref">substitui um dos slides 19–21</span></div>
+        <p>Marianne Fernandes dava aula de inglês — categoria genérica, concorrência infinita, preço comprimido. O reposicionamento trocou a categoria pela dor: <strong>entrevistas em inglês</strong>. Mesma pessoa, mesma competência, outra pergunta respondida. Saiu de R$ 20 mil/mês para quase R$ 120 mil/mês.</p>
+        <div class="ratios">
+          <div><div class="case">ANTES</div><div class="rate">R$ 20 mil/mês</div><div class="sub">“aulas de inglês” — categoria</div></div>
+          <div><div class="case">DEPOIS</div><div class="rate">~R$ 120 mil/mês</div><div class="sub">“entrevistas em inglês” — dor</div></div>
+          <div><div class="case">DELTA</div><div class="rate">~6×</div><div class="sub">em 6 meses, sem audiência nova</div></div>
+        </div>
+        <p style="margin-top:16px">Este case resolve de uma vez quatro coisas que a revisão de ontem deixou em aberto: é a <strong>cena</strong> que o deck não tinha (gente com nome, tensão, virada); prova o <strong>método</strong> e não o fornecedor, porque o mecanismo é visível e copiável; responde a <strong>“nada para quem ainda não tem case”</strong> da seção 06, já que ela começou sem audiência e sem prova; e é a demonstração mais limpa do slide 12 — dor explícita, dor implícita, sonho operacional — que hoje é só teoria na tela.</p>
+        <p><strong>Ressalva que precisa estar no palco.</strong> O salto não veio só do perfil: oferta, preço e posicionamento foram revistos junto. Isso não enfraquece o case — decide onde ele entra. Contado como “reescrevi a headline e faturei 6×”, vira promessa de guru e a plateia desconta. Contado como “trocamos a categoria pela dor, e isso obrigou a mudar oferta e preço junto”, vira o mecanismo real: <strong>o perfil é onde o reposicionamento aparece, não o que o causou</strong>. A captura de tela deixa de ser prova de receita e passa a ser o artefato do reposicionamento — que é um papel mais defensável e mais útil para quem está anotando.</p>
+        <div class="fix"><b>Correção</b>Entra como o case contado em cena (3 min) no bloco dos minutos 30–37, no lugar de um dos três cases Alpaca — que o achado 03 já mandava cortar. Ancorar no slide 12 (dor explícita → implícita → sonho), não no 14, e dizer em voz alta o que mais mudou além do perfil. Essa frase é candidata natural ao slide de honestidade custosa dos minutos 37–39: é o momento em que você tira força do próprio case e ganha credibilidade por isso.</div>
+      </div>
+    </div>
+
+    <div class="finding crit">
+      <div class="f-num">12</div>
+      <div>
+        <div class="f-head"><h3>Mari × Ian: o par de perfis vale mais que os dois separados</h3><span class="sev c">crítico</span><span class="slideref">slides 14–15 · resolve o achado 07</span></div>
+        <p>As duas capturas em <code>assets/cases/</code> não são dois exemplos. São um argumento, e ele se monta sozinho quando estão lado a lado.</p>
+        <p><strong>Mari</strong> não tem contagem de seguidores à mostra — aparece “mais de 500 conexões”, o piso do LinkedIn. E o perfil é uma máquina: a própria URL é o nicho (<code>/in/entrevistaseminglês</code>); a headline entrega resultado e cadência (“a que mais aprova designers no Brasil · 1 aprovação por semana”); o banner faz a pergunta do cliente e termina em CTA (“manda uma DM”); o destaque é uma isca de diagnóstico; e o “Sobre” abre com <em class="q">Seu inglês trava na hora da entrevista?</em> — a dor do outro na primeira linha. É o slide 15 executado inteiro, por alguém que não é você.</p>
+        <p><strong>Ian</strong> tem 33.286 seguidores e uma headline que diz “Fundador da BLACK SHEEP” — cargo genérico, exatamente o que o slide 15 condena. O banner é uma tese sem chamada. O “Sobre” abre com <em class="q">Acredito que a melhor forma de descrever quem eu sou…</em>, ou seja, começa por ele. Autoridade real, sem porta de entrada.</p>
+        <p>Lado a lado, a leitura é imediata: <strong>33 mil seguidores com um perfil que não converte contra menos de 500 conexões com um perfil que trabalha sozinho.</strong> É a espinha B (“você não precisa de audiência”) e a espinha C (“seu perfil é a página de vendas que você nunca escreveu”) provadas na mesma tela, com evidência que ninguém pode alegar que você fabricou.</p>
+        <div class="fix"><b>Correção</b>Substituir o mock de perfil do slide 14 pelas duas capturas reais e ancorar o slide 15 nelas. Isso também fecha o achado 07: o slide do Ian deixa de contradizer a sua tese com métricas de vaidade e passa a ser o lado necessário do contraste — o enquadramento “autoridade existente, sistema em construção” que o deck já usa continua honesto e não deprecia o cliente. Bônus: remove o <code>FRAMEWORK 50/10</code> do mock, que a seção 06 mandava tirar.</div>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="f-num">13</div>
+      <div>
+        <div class="f-head"><h3>Kyle Poyar responde a pergunta que a plateia vai fazer sobre IA</h3><span class="sev m">médio</span><span class="slideref">entra no bloco comprimido de algoritmo</span></div>
+        <p>Num festival de tecnologia em 2026, alguém vai levantar a mão e perguntar por que investir em perfil pessoal se a IA está mudando a aquisição. O deck hoje não tem resposta — e a resposta existe, com dado de terceiro.</p>
+        <p>O <em class="q">State of B2B GTM</em> do Kyle Poyar (Growth Unhinged) ouviu 195 líderes de GTM entre setembro e outubro de 2025. Os três números que importam para você:</p>
+        <div class="ratios">
+          <div><div class="case">LINKEDIN</div><div class="rate">66%</div><div class="sub">canal mais adotado hoje — à frente de SEO (53%) e warm outbound (48%)</div></div>
+          <div><div class="case">AI SEARCH / AEO</div><div class="rate">51%</div><div class="sub">planejam aumentar investimento — o maior salto da pesquisa</div></div>
+          <div><div class="case">SEO TRADICIONAL</div><div class="rate">14%</div><div class="sub">planejam aumentar — o canal que está sendo abandonado</div></div>
+        </div>
+        <p style="margin-top:16px">O argumento que esses três números sustentam: a IA está comendo a busca tradicional, e quem dependia de ser encontrado no Google está migrando para um canal que ainda não tem playbook. Enquanto isso, o canal que a IA não substitui é o que passa por uma pessoa reconhecível. A pesquisa ainda lista <strong>founder-led GTM entre os canais de maior impacto para empresas early-stage</strong> — que é exatamente quem está sentado na sua sala.</p>
+        <p>Isso também dá ao bloco de algoritmo uma razão para existir que não seja “o feed mudou”. Hoje ele são 7 minutos no conteúdo que envelhece mais rápido; com o Poyar dentro, os 4 minutos que sobram passam a falar de onde a aquisição B2B está indo, e não de como agradar a distribuição.</p>
+        <div class="fix"><b>Correção</b>Um slide dentro do bloco comprimido (achado 06). Declarar o recorte na fonte, como o deck já faz com o Richard van der Blom: amostra dos EUA, SaaS/IA, empresas de US$ 1–10M de ARR. Não é dado brasileiro e não deve ser apresentado como tal.</div>
+      </div>
+    </div>
+
+    <div class="verdict" style="margin-top:34px">
+      <div class="label">o custo em minutos disso tudo</div>
+      <p>Zero. As quatro entradas ocupam espaço que a revisão de ontem já mandava esvaziar: o Founder-led Growth toma o slide 4, que estava morto; a Mari entra na vaga do terceiro case Alpaca, que o achado 03 já cortava; os perfis reais substituem o mock que já existe; e o Poyar cabe no bloco de algoritmo, que encolhe de 7 para 4 minutos de qualquer jeito. O orçamento da seção 02 continua de pé, e os 13 minutos de ação para a plateia continuam intactos.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <div class="sec-num">09</div>
+      <h2>Status das pendências — 03/09, fim do dia</h2>
+    </div>
+    <p class="lede">As três perguntas do adendo foram respondidas. Três de ontem seguem abertas, e uma delas ainda trava a reestruturação.</p>
+
+    <div class="fix" style="max-width:none">
+      <b>respondido</b>
+      <p style="margin:0 0 10px"><strong>Janela do case da Mari: 6 meses.</strong> De R$ 20 mil para ~R$ 120 mil/mês. O número deixa de ser infalsificável e vira o dado mais forte do deck — seis meses é curto o bastante para impressionar e longo o bastante para ser crível.</p>
+      <p style="margin:0 0 10px"><strong>Consentimento de Mari e Ian: ok.</strong> Os dois perfis podem ir ao telão com nome e foto.</p>
+      <p style="margin:0"><strong>O que mudou além do perfil: oferta, preço e mais.</strong> Tratado no achado 11 — muda o enquadramento do case, não o seu valor.</p>
+    </div>
+
+    <ol class="steps" style="margin-top:26px">
+      <li><b>A espinha: A, B ou C. Ainda aberta — e é a que trava tudo.</b> Seção 01. Vale registrar que o material novo empurra para <strong>B</strong> (“você não precisa de audiência, precisa de 30 pessoas certas”): o par Mari × Ian prova essa frase literalmente na tela, e a plateia early-stage do HackTown é exatamente quem não tem audiência. A recomendação de ontem era A por economia de retrabalho; com os perfis em mãos, B passou a ter a prova mais forte.</li>
+      <li><b>A janela dos três cases Alpaca.</b> Em quantos meses os 177 / 698 / 102 leads. Se sobrar só um case Alpaca depois do corte, é uma resposta só — mas continua necessária pelo mesmo motivo que a da Mari era.</li>
+      <li><b>A URL da landing da palestra.</b> Para o QR via <code>?lead=</code>. Sem ela o deck fica apontando para a home, e o achado 09 permanece aberto.</li>
+    </ol>
+  </section>
+
+  <footer>
+    <span>Alpaca Labs · briefing interno</span>
+    <span>Base: linkedin-canal-aquisicao-hacktown.html · 27 slides · deck não alterado</span>
+    <span>Revisão: 02/09/2026 · adendo 03/09/2026</span>
+  </footer>
+
+</div>
